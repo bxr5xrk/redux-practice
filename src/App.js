@@ -1,15 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import { addCash, getCash } from "./store/cashReducer";
 import { addCustomers, removeCustomers } from "./store/customerReducer";
 
 function App() {
     const dispatch = useDispatch();
     const cash = useSelector((state) => state.cash.cash);
     const customers = useSelector((state) => state.customers.customers);
-
-    const addCash = (cash) => dispatch({ type: "ADD_CASH", payload: cash });
-
-    const getCash = (cash) => dispatch({ type: "GET_CASH", payload: cash });
 
     const addCustomer = (name) => {
         const user = {
@@ -25,11 +22,21 @@ function App() {
         <div className="App">
             <h1>{cash}</h1>
             <div>
-                <button onClick={() => addCash(Number(prompt("enter: ")))}>
+                <button
+                    onClick={() => dispatch(addCash(1))}
+                >
                     Add
                 </button>
 
-                {cash > 0 && <button onClick={() => getCash(10)}>Get</button>}
+                {cash > 0 && (
+                    <button
+                        onClick={() =>
+                            dispatch(getCash(Number(prompt("enter: "))))
+                        }
+                    >
+                        Get
+                    </button>
+                )}
             </div>
 
             <button onClick={() => addCustomer(prompt("enter: "))}>
