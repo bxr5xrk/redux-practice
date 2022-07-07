@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { addCash, getCash } from "./store/cashReducer";
-import { addCustomers, removeCustomers } from "./store/customerReducer";
+import {
+    addCustomers,
+    fetchCustomers,
+    removeCustomers,
+} from "./store/customerReducer";
 
 function App() {
     const dispatch = useDispatch();
@@ -22,11 +26,7 @@ function App() {
         <div className="App">
             <h1>{cash}</h1>
             <div>
-                <button
-                    onClick={() => dispatch(addCash(1))}
-                >
-                    Add
-                </button>
+                <button onClick={() => dispatch(addCash(1))}>Add</button>
 
                 {cash > 0 && (
                     <button
@@ -41,6 +41,10 @@ function App() {
 
             <button onClick={() => addCustomer(prompt("enter: "))}>
                 Add Customer
+            </button>
+
+            <button onClick={() => dispatch(fetchCustomers())}>
+                add many customers
             </button>
 
             {customers.length ? (
