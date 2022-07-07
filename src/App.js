@@ -20,6 +20,7 @@ function App() {
         dispatch(addCustomers(user));
     };
 
+
     const removeCustomer = (id) => dispatch(removeCustomers(id));
 
     return (
